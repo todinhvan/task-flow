@@ -1,4 +1,3 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -11,7 +10,9 @@ async function bootstrap() {
   const port = envConfig.Port;
   const globalPrefix = envConfig.GlobalPrefix;
   const devOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'];
-  const allowedOrigins = Array.from(new Set([envConfig.ClientUrl, ...(envConfig.NodeEnv === 'production' ? [] : devOrigins)]));
+  const allowedOrigins = Array.from(
+    new Set([envConfig.ClientUrl, ...(envConfig.NodeEnv === 'production' ? [] : devOrigins)]),
+  );
 
   app.setGlobalPrefix(globalPrefix);
   app.disable('x-powered-by');
@@ -42,16 +43,16 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization', 'X-API-KEY'],
   });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
-    }),
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     whitelist: true,
+  //     forbidNonWhitelisted: true,
+  //     transform: true,
+  //     transformOptions: {
+  //       enableImplicitConversion: true,
+  //     },
+  //   }),
+  // );
 
   const config = new DocumentBuilder()
     .setTitle('Task Flow API')

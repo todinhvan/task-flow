@@ -184,13 +184,7 @@ backend/
 
 ## Hướng dẫn cài đặt
 
-### 1. Khởi động PostgreSQL - Dùng Docker
-
-```bash
-docker compose -f docker-compose.provider.yaml up -d
-```
-
-### 2. Cài đặt các dependencies
+### 1. Cài đặt các dependencies
 
 ```bash
 cd backend
@@ -201,6 +195,12 @@ Nếu chưa có `pnpm`:
 
 ```bash
 npm install -g pnpm
+```
+
+### 2. Khởi động PostgreSQL - Dùng Docker
+
+```bash
+docker compose -f docker-compose.provider.yaml up -d
 ```
 
 ### 3. Tạo `backend/.env`
