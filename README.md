@@ -54,6 +54,6 @@ task-flow/
 
 ## Sử dụng hệ thống
 
-- Admin: admin@taskflow.local - Taskflow@123
-- Manager: manager@taskflow.local - Taskflow@123
-- Employee: employee@taskflow.local - Taskflow@123
+- Admin: nguyen.minh.anh.admin@taskflow.local - Taskflow@123
+- Manager: le.quoc.bao.manager@taskflow.local - Taskflow@123
+- Employee: nguyen.thi.lan@taskflow.local - Taskflow@123

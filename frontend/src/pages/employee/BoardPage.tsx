@@ -673,7 +673,7 @@ export default function BoardPage() {
           }
         }}
       >
-        <DialogContent className="sm:max-w-xl lg:max-w-2xl">
+        <DialogContent className="sm:max-w-[36rem] lg:max-w-2xl">
           {detailTask ? (
             <>
               <DialogHeader className="pr-10">
@@ -967,7 +967,7 @@ export default function BoardPage() {
       </Dialog>
 
       <Dialog open={listDialogOpen} onOpenChange={setListDialogOpen}>
-        <DialogContent className="sm:max-w-xl lg:max-w-2xl">
+        <DialogContent className="sm:max-w-[36rem] lg:max-w-2xl">
           <DialogHeader className="pr-10">
             <DialogTitle>{editingList ? t("board.editList") : t("board.createList")}</DialogTitle>
             <DialogDescription>

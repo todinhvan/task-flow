@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/context/AuthContext";
 import { useI18n } from "@/context/I18nContext";
-import { PermissionCode, hasPermission } from "@/lib/permissions";
+import { PermissionCode, getManageHomePath, hasPermission } from "@/lib/permissions";
 
 function initials(name: string) {
   return name
@@ -44,6 +44,24 @@ function resolveProfilePath(pathname: string, roleCode: string) {
   return "/manage/profile";
 }
 
+function resolveWorkspaceShortcut(user: NonNullable<ReturnType<typeof useAuth>["user"]>) {
+  if (user.role.code === "ADMIN") {
+    return {
+      path: getManageHomePath(user),
+      labelKey: "account.adminConsole",
+    } as const;
+  }
+
+  if (user.role.code === "MANAGER" && hasPermission(user, PermissionCode.TaskAssign)) {
+    return {
+      path: getManageHomePath(user),
+      labelKey: "account.managerPage",
+    } as const;
+  }
+
+  return null;
+}
+
 export default function UserAccountMenu() {
   const { logout, user } = useAuth();
   const { t } = useI18n();
@@ -57,6 +75,14 @@ export default function UserAccountMenu() {
 
     return resolveProfilePath(location.pathname, user.role.code);
   }, [location.pathname, user]);
+
+  const workspaceShortcut = useMemo(() => {
+    if (!user) {
+      return null;
+    }
+
+    return resolveWorkspaceShortcut(user);
+  }, [user]);
 
   if (!user) {
     return null;
@@ -104,17 +130,10 @@ export default function UserAccountMenu() {
           {t("account.viewEditProfile")}
         </DropdownMenuItem>
 
-        {user.role.code === "ADMIN" ? (
-          <DropdownMenuItem onClick={() => navigate("/manage/dashboard")}>
+        {workspaceShortcut ? (
+          <DropdownMenuItem onClick={() => navigate(workspaceShortcut.path)}>
             <MonitorCogIcon className="size-4" />
-            {t("account.managerPage")}
-          </DropdownMenuItem>
-        ) : null}
-
-        {user.role.code === "MANAGER" && hasPermission(user, PermissionCode.TaskAssign) ? (
-          <DropdownMenuItem onClick={() => navigate("/manage/tasks")}>
-            <MonitorCogIcon className="size-4" />
-            {t("account.manageWorkspace")}
+            {t(workspaceShortcut.labelKey)}
           </DropdownMenuItem>
         ) : null}
 

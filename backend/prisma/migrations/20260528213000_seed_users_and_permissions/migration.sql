@@ -56,13 +56,10 @@ SELECT
   NULL
 FROM (
   VALUES
-    ('seed-user-admin-01', 'admin@taskflow.local', 'ADMIN'),
     ('seed-user-admin-02', 'nguyen.minh.anh.admin@taskflow.local', 'ADMIN'),
     ('seed-user-admin-03', 'tran.thu.ha.admin@taskflow.local', 'ADMIN'),
-    ('seed-user-manager-01', 'manager@taskflow.local', 'MANAGER'),
     ('seed-user-manager-02', 'le.quoc.bao.manager@taskflow.local', 'MANAGER'),
     ('seed-user-manager-03', 'pham.hoang.long.manager@taskflow.local', 'MANAGER'),
-    ('seed-user-employee-01', 'employee@taskflow.local', 'EMPLOYEE'),
     ('seed-user-employee-02', 'nguyen.thi.lan@taskflow.local', 'EMPLOYEE'),
     ('seed-user-employee-03', 'tran.minh.khoa@taskflow.local', 'EMPLOYEE'),
     ('seed-user-employee-04', 'le.thao.nguyen@taskflow.local', 'EMPLOYEE'),
