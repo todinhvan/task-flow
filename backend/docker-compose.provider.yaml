@@ -1,0 +1,25 @@
+name: task-flow-provider
+version: '3.8'
+
+networks:
+  task-flow-nw:
+    driver: bridge
+
+volumes:
+  task-flow-db-data:
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: task-flow-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: taskflow
+      PGDATA: /var/lib/postgresql/custom_data
+    ports:
+      - 5432:5432
+    volumes:
+      - task-flow-db-data:/var/lib/postgresql/custom_data
+    networks:
+      - task-flow-nw
